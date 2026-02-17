@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+git+https://github.com/reingart/pyafipws.git
+weasyprint
+python-multipart
+requests
+python-dotenv
