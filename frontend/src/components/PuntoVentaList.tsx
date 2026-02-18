@@ -53,6 +53,29 @@ export function PuntoVentaList({ refreshTrigger }: { refreshTrigger: number }) {
         }
     };
 
+    const deletePuntoVenta = async (id: number, numero: number) => {
+        if (!confirm(`¿Estás seguro de que deseas eliminar el Punto de Venta ${numero}? Esta acción no se puede deshacer.`)) {
+            return;
+        }
+
+        try {
+            await api.delete(`/puntos-venta/${id}`);
+            toast({
+                title: "Punto de Venta Eliminado",
+                description: `El punto de venta ${numero} ha sido eliminado correctamente.`,
+                className: "bg-green-500 text-white",
+            });
+            fetchPuntos(); // Recargar lista
+        } catch (error: any) {
+            console.error("Error deleting punto de venta:", error);
+            toast({
+                title: "Error",
+                description: error.response?.data?.detail || "No se pudo eliminar el punto de venta",
+                variant: "destructive",
+            });
+        }
+    };
+
     return (
         <Card className="w-full max-w-4xl mx-auto mt-8">
             <CardHeader>
@@ -86,6 +109,15 @@ export function PuntoVentaList({ refreshTrigger }: { refreshTrigger: number }) {
                                         disabled={testingConnection === pv.id}
                                     >
                                         {testingConnection === pv.id ? "Probando..." : "Probar Conexión"}
+                                    </Button>
+                                    <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        className="ml-2"
+                                        onClick={() => deletePuntoVenta(pv.id, pv.numero)}
+                                        disabled={testingConnection === pv.id}
+                                    >
+                                        Eliminar
                                     </Button>
                                 </TableCell>
                             </TableRow>

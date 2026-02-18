@@ -1,0 +1,1442 @@
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:39062 - "GET /api/afip/test-connection/1 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:50136 - "GET /api/afip/test-connection/1 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:37884 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:37884 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:37546 - "POST /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:37546 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:37546 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'generate_csr.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [22]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:51854 - "POST /api/puntos-venta/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "puntos_venta_numero_key"
+DETAIL:  Key (numero)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1134, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 424, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/afip.py", line 50, in create_punto_venta
+    db_pv = crud_pv.create_punto_venta(db, pv_data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/crud/puntos_venta.py", line 23, in create_punto_venta
+    db.commit()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "puntos_venta_numero_key"
+DETAIL:  Key (numero)=(1) already exists.
+
+[SQL: INSERT INTO puntos_venta (numero, nombre, cuit, certificado_path, key_path, es_produccion) VALUES (%(numero)s, %(nombre)s, %(cuit)s, %(certificado_path)s, %(key_path)s, %(es_produccion)s) RETURNING puntos_venta.id]
+[parameters: {'numero': 1, 'nombre': None, 'cuit': '20142944295', 'certificado_path': '', 'key_path': '', 'es_produccion': False}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+INFO:     172.18.0.1:40870 - "POST /api/puntos-venta/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "puntos_venta_numero_key"
+DETAIL:  Key (numero)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1134, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 424, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/afip.py", line 50, in create_punto_venta
+    db_pv = crud_pv.create_punto_venta(db, pv_data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/crud/puntos_venta.py", line 23, in create_punto_venta
+    db.commit()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "puntos_venta_numero_key"
+DETAIL:  Key (numero)=(1) already exists.
+
+[SQL: INSERT INTO puntos_venta (numero, nombre, cuit, certificado_path, key_path, es_produccion) VALUES (%(numero)s, %(nombre)s, %(cuit)s, %(certificado_path)s, %(key_path)s, %(es_produccion)s) RETURNING puntos_venta.id]
+[parameters: {'numero': 1, 'nombre': None, 'cuit': '20142944295', 'certificado_path': '', 'key_path': '', 'es_produccion': False}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+INFO:     172.18.0.1:40874 - "POST /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:40874 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:40874 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:41536 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:45868 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:34278 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:36062 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:36062 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:36062 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [22]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'app/routers/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:41254 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:41254 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:41254 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:46924 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:45718 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:45718 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:45718 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:49054 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:48140 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:55088 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Conectando WSAA con cache=/app/cache wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl
+INFO:     172.18.0.1:51732 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [21]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [21]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Conectando WSAA con cache=None (TEST) wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl
+INFO:     172.18.0.1:39682 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Conectando WSAA con cache=None (TEST) wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl
+INFO:     172.18.0.1:37070 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Conectando WSAA con cache=None (TEST) wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl
+INFO:     172.18.0.1:35928 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: self.wsaa attributes: ['AnalizarCertificado', 'AnalizarXml', 'Autenticar', 'CallWSAA', 'Conectar', 'CrearClavePrivada', 'CrearPedidoCertificado', 'CreateTRA', 'DebugLog', 'Excepcion', 'Expirado', 'GetParametro', 'HOMO', 'InstallDir', 'LanzarExcepciones', 'LeerError', 'LoadTestXML', 'Log', 'LoginCMS', 'ObtenerTagXml', 'SetParametro', 'SetParametros', 'SetTicketAcceso', 'Sign', 'SignTRA', 'TTL', 'Token', 'Traceback', 'Version', 'WSDL', 'XmlRequest', 'XmlResponse', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_public_attrs_', '_public_methods_', '_readonly_attrs_', '_reg_class_spec_', '_reg_clsid_', '_reg_progid_', 'client', 'inicializar', 'log', 'params_in', 'reintentos', 'xml', 'xml_request', 'xml_response']
+DEBUG: Calling Conectar(wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl) without cache arg
+INFO:     172.18.0.1:57154 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: self.wsaa attributes: ['AnalizarCertificado', 'AnalizarXml', 'Autenticar', 'CallWSAA', 'Conectar', 'CrearClavePrivada', 'CrearPedidoCertificado', 'CreateTRA', 'DebugLog', 'Excepcion', 'Expirado', 'GetParametro', 'HOMO', 'InstallDir', 'LanzarExcepciones', 'LeerError', 'LoadTestXML', 'Log', 'LoginCMS', 'ObtenerTagXml', 'SetParametro', 'SetParametros', 'SetTicketAcceso', 'Sign', 'SignTRA', 'TTL', 'Token', 'Traceback', 'Version', 'WSDL', 'XmlRequest', 'XmlResponse', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_public_attrs_', '_public_methods_', '_readonly_attrs_', '_reg_class_spec_', '_reg_clsid_', '_reg_progid_', 'client', 'inicializar', 'log', 'params_in', 'reintentos', 'xml', 'xml_request', 'xml_response']
+DEBUG: Calling Conectar(wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl) without cache arg
+INFO:     172.18.0.1:57772 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: self.wsaa attributes: ['AnalizarCertificado', 'AnalizarXml', 'Autenticar', 'CallWSAA', 'Conectar', 'CrearClavePrivada', 'CrearPedidoCertificado', 'CreateTRA', 'DebugLog', 'Excepcion', 'Expirado', 'GetParametro', 'HOMO', 'InstallDir', 'LanzarExcepciones', 'LeerError', 'LoadTestXML', 'Log', 'LoginCMS', 'ObtenerTagXml', 'SetParametro', 'SetParametros', 'SetTicketAcceso', 'Sign', 'SignTRA', 'TTL', 'Token', 'Traceback', 'Version', 'WSDL', 'XmlRequest', 'XmlResponse', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_public_attrs_', '_public_methods_', '_readonly_attrs_', '_reg_class_spec_', '_reg_clsid_', '_reg_progid_', 'client', 'inicializar', 'log', 'params_in', 'reintentos', 'xml', 'xml_request', 'xml_response']
+DEBUG: Calling Conectar(wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl) without cache arg
+DEBUG: Conectar finished (or raised)
+INFO:     172.18.0.1:35166 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: self.wsaa attributes: ['AnalizarCertificado', 'AnalizarXml', 'Autenticar', 'CallWSAA', 'Conectar', 'CrearClavePrivada', 'CrearPedidoCertificado', 'CreateTRA', 'DebugLog', 'Excepcion', 'Expirado', 'GetParametro', 'HOMO', 'InstallDir', 'LanzarExcepciones', 'LeerError', 'LoadTestXML', 'Log', 'LoginCMS', 'ObtenerTagXml', 'SetParametro', 'SetParametros', 'SetTicketAcceso', 'Sign', 'SignTRA', 'TTL', 'Token', 'Traceback', 'Version', 'WSDL', 'XmlRequest', 'XmlResponse', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_public_attrs_', '_public_methods_', '_readonly_attrs_', '_reg_class_spec_', '_reg_clsid_', '_reg_progid_', 'client', 'inicializar', 'log', 'params_in', 'reintentos', 'xml', 'xml_request', 'xml_response']
+DEBUG: Calling Conectar(wsdl=https://wsaa.afip.gov.ar/ws/services/LoginCms?wsdl) without cache arg
+DEBUG: Conectar finished (or raised)
+DEBUG: EXCEPTION IN Expirado: 'NoneType' object is not subscriptable
+DEBUG: TRACEBACK Expirado:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 48, in authenticate
+    expirado = self.wsaa.Expirado()
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 481, in Expirado
+    d = datetime.datetime.strptime(fecha[:19], "%Y-%m-%dT%H:%M:%S")
+                                   ~~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+INFO:     172.18.0.1:44140 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:47082 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [16]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:53810 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:51612 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:51612 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:51612 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:35642 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/routers/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+INFO:     172.18.0.1:38644 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/routers/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [9]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [9]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Forzando produccion=False para test-connection
+INFO:     172.18.0.1:34334 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [9]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Forzando produccion=False para test-connection
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+INFO:     172.18.0.1:55180 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/routers/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [9]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [17]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+INFO:     172.18.0.1:43342 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+Traceback (most recent call last):
+  File "/usr/local/bin/uvicorn", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1406, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 433, in main
+    run(
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 601, in run
+    ChangeReload(config, target=server.run, sockets=[sock]).run()
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/supervisors/basereload.py", line 52, in run
+    for changes in self:
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/supervisors/basereload.py", line 71, in __next__
+    return self.should_restart()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/supervisors/statreload.py", line 31, in should_restart
+    for file in self.iter_py_files():
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/supervisors/statreload.py", line 51, in iter_py_files
+    for path in list(reload_dir.rglob("*.py")):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 968, in rglob
+    for p in selector.select_from(self):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 320, in select_from
+    if not is_dir(parent_path):
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1250, in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/pathlib.py", line 1013, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error: '/app'
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.18.0.1:33434 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:33434 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: LoginCMS exitoso
+DEBUG: Seteando Ticket. Expiracion: MISSING
+INFO:     172.18.0.1:60230 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+
+INFO:     172.18.0.1:37946 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+
+INFO:     172.18.0.1:50028 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: LoginCMS exitoso
+DEBUG: XML RESPONSE: b'<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><loginCmsResponse xmlns="https://wsaahomo.afip.gov.ar/ws/services/LoginCms"><loginCmsReturn>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;\n&lt;loginTicketResponse version=&quot;1.0&quot;&gt;\n    &lt;header&gt;\n        &lt;source&gt;CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239&lt;/source&gt;\n        &lt;destination&gt;SERIALNUMBER=CUIT 20142944295, CN=negrete&lt;/destination&gt;\n        &lt;uniqueId&gt;2358869764&lt;/uniqueId&gt;\n        &lt;generationTime&gt;2026-02-18T19:21:16.699-03:00&lt;/generationTime&gt;\n        &lt;expirationTime&gt;2026-02-19T07:21:16.699-03:00&lt;/expirationTime&gt;\n    &lt;/header&gt;\n    &lt;credentials&gt;\n        &lt;token&gt;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhaG9tbywgTz1BRklQLCBDPUFSLCBTRVJJQUxOVU1CRVI9Q1VJVCAzMzY5MzQ1MDIzOSIgZHN0PSJDTj13c2ZlLCBPPUFGSVAsIEM9QVIiIHVuaXF1ZV9pZD0iMjAxODg5MjAyMSIgZ2VuX3RpbWU9IjE3NzE0NTMyMTYiIGV4cF90aW1lPSIxNzcxNDk2NDc2Ii8+CiAgICA8b3BlcmF0aW9uIHR5cGU9ImxvZ2luIiB2YWx1ZT0iZ3JhbnRlZCI+CiAgICAgICAgPGxvZ2luIGVudGl0eT0iMzM2OTM0NTAyMzkiIHNlcnZpY2U9IndzZmUiIHVpZD0iU0VSSUFMTlVNQkVSPUNVSVQgMjAxNDI5NDQyOTUsIENOPW5lZ3JldGUiIGF1dGhtZXRob2Q9ImNtcyIgcmVnbWV0aG9kPSIyMiI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24ga2V5PSIyMDE0Mjk0NDI5NSIgcmVsdHlwZT0iNCIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgo=&lt;/token&gt;\n        &lt;sign&gt;sD1DRz3DgtoJKQcNbCH4QDR1nCA4TcP/xs0IDDVmR+Qs8LX0GBE2sCSWvW4d86Ny3WTQwzZ5hrHeGNnXow4b+JE8Sk4FsT0HJM40oi34ewdXAxNpWFCi3Bxbw9XGqb1j2XhUP2hKe32Yhm9MPEG/iCbjF4Xds/h6d1vNaoutfQU=&lt;/sign&gt;\n    &lt;/credentials&gt;\n&lt;/loginTicketResponse&gt;\n</loginCmsReturn></loginCmsResponse></soapenv:Body></soapenv:Envelope>'
+DEBUG: Error en LoginCMS: LoginCMS no devolvió Expiración. Respuesta: 
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 79, in authenticate
+    raise Exception(f"LoginCMS no devolvió Expiración. Respuesta: {getattr(self.wsaa, 'Excepcion', 'Desconocida')}")
+Exception: LoginCMS no devolvió Expiración. Respuesta: 
+
+INFO:     172.18.0.1:35536 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:54492 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:52244 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:42818 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:42818 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:42818 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:51852 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 69, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:39568 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [22]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [22]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: LoginCMS exitoso
+DEBUG: XML RESPONSE: b'<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><loginCmsResponse xmlns="https://wsaahomo.afip.gov.ar/ws/services/LoginCms"><loginCmsReturn>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;\n&lt;loginTicketResponse version=&quot;1.0&quot;&gt;\n    &lt;header&gt;\n        &lt;source&gt;CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239&lt;/source&gt;\n        &lt;destination&gt;SERIALNUMBER=CUIT 20142944295, CN=negrete&lt;/destination&gt;\n        &lt;uniqueId&gt;310240426&lt;/uniqueId&gt;\n        &lt;generationTime&gt;2026-02-18T19:34:04.487-03:00&lt;/generationTime&gt;\n        &lt;expirationTime&gt;2026-02-19T07:34:04.487-03:00&lt;/expirationTime&gt;\n    &lt;/header&gt;\n    &lt;credentials&gt;\n        &lt;token&gt;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhaG9tbywgTz1BRklQLCBDPUFSLCBTRVJJQUxOVU1CRVI9Q1VJVCAzMzY5MzQ1MDIzOSIgZHN0PSJDTj13c2ZlLCBPPUFGSVAsIEM9QVIiIHVuaXF1ZV9pZD0iNDA4NDY2MzkyNCIgZ2VuX3RpbWU9IjE3NzE0NTM5ODQiIGV4cF90aW1lPSIxNzcxNDk3MjQ0Ii8+CiAgICA8b3BlcmF0aW9uIHR5cGU9ImxvZ2luIiB2YWx1ZT0iZ3JhbnRlZCI+CiAgICAgICAgPGxvZ2luIGVudGl0eT0iMzM2OTM0NTAyMzkiIHNlcnZpY2U9IndzZmUiIHVpZD0iU0VSSUFMTlVNQkVSPUNVSVQgMjAxNDI5NDQyOTUsIENOPW5lZ3JldGUiIGF1dGhtZXRob2Q9ImNtcyIgcmVnbWV0aG9kPSIyMiI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24ga2V5PSIyMDE0Mjk0NDI5NSIgcmVsdHlwZT0iNCIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgo=&lt;/token&gt;\n        &lt;sign&gt;gP3xQHvefwpSfUA359pqNcRHbFNpxCrUBArR8PWzco6g+hvpKNhdvcf+CVCPBPwUkoESQr8eMdNLundpGKy/xOtv7tWKmGt9/4tHYUvnA8K1fc8HIZjxcLbNEFVhI7OD/7oDu6nVsKJFIFxcnQ9ktyDIfgIwjJ53UXKFqL97Elo=&lt;/sign&gt;\n    &lt;/credentials&gt;\n&lt;/loginTicketResponse&gt;\n</loginCmsReturn></loginCmsResponse></soapenv:Body></soapenv:Envelope>'
+DEBUG: pyafipws no parseó XML, intentando manual...
+DEBUG: Parseo manual exitoso. Expiracion: 2026-02-19T07:34:04.487-03:00
+DEBUG: Seteando Ticket. Expiracion: 2026-02-19T07:34:04.487-03:00
+INFO:     172.18.0.1:36184 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [15]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [15]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Escaneando caché manualmente...
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 102, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:51720 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Escaneando caché manualmente...
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 102, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:46608 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 5 - CUIT: 20142944295 - Es Produccion: False
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 95, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:coe.alreadyAuthenticated: El CEE ya posee un TA valido para el acceso al WSN solicitado
+
+INFO:     172.18.0.1:33024 - "GET /api/afip/test-connection/5 HTTP/1.1" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Intentando leer /app/cache/TA.xml manualmente...
+DEBUG: Error leyendo /app/cache/TA.xml: cannot access local variable 'html' where it is not associated with a value
+DEBUG: Generando nuevo token...
+DEBUG: Error en LoginCMS: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+DEBUG: TRACEBACK:
+Traceback (most recent call last):
+  File "/app/app/services/afip.py", line 95, in authenticate
+    self.wsaa.LoginCMS(cms)
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/utils.py", line 191, in capturar_errores_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pyafipws/wsaa.py", line 459, in LoginCMS
+    results = self.client.loginCms(in0=cms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 159, in <lambda>
+    return lambda *args, **kwargs: self.wsdl_call(attr,*args,**kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 354, in wsdl_call
+    response = self.call(method, types, *params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pysimplesoap/client.py", line 234, in call
+    raise SoapFault(str(response.faultcode), str(response.faultstring))
+pysimplesoap.client.SoapFault: ns1:cms.cert.untrusted: Certificado no emitido por AC de confianza
+
+INFO:     172.18.0.1:42296 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [10]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Intentando leer /app/cache/TA.xml manualmente...
+DEBUG: Token válido encontrado manualmente en /app/cache/TA.xml
+DEBUG: Seteando Ticket. Expiracion: 2026-02-19T07:34:04.487-03:00
+INFO:     172.18.0.1:50150 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+INFO:     172.18.0.1:40844 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+INFO:     172.18.0.1:40844 - "GET /api/puntos-venta/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [39]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [39]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:{'token': 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhaG9tbywgTz1BRklQLCBDPUFSLCBTRVJJQUxOVU1CRVI9Q1VJVCAzMzY5MzQ1MDIzOSIgZHN0PSJDTj13c2ZlLCBPPUFGSVAsIEM9QVIiIHVuaXF1ZV9pZD0iNDA4NDY2MzkyNCIgZ2VuX3RpbWU9IjE3NzE0NTM5ODQiIGV4cF90aW1lPSIxNzcxNDk3MjQ0Ii8+CiAgICA8b3BlcmF0aW9uIHR5cGU9ImxvZ2luIiB2YWx1ZT0iZ3JhbnRlZCI+CiAgICAgICAgPGxvZ2luIGVudGl0eT0iMzM2OTM0NTAyMzkiIHNlcnZpY2U9IndzZmUiIHVpZD0iU0VSSUFMTlVNQkVSPUNVSVQgMjAxNDI5NDQyOTUsIENOPW5lZ3JldGUiIGF1dGhtZXRob2Q9ImNtcyIgcmVnbWV0aG9kPSIyMiI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24ga2V5PSIyMDE0Mjk0NDI5NSIgcmVsdHlwZT0iNCIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgo=', 'sign': 'gP3xQHvefwpSfUA359pqNcRHbFNpxCrUBArR8PWzco6g+hvpKNhdvcf+CVCPBPwUkoESQr8eMdNLundpGKy/xOtv7tWKmGt9/4tHYUvnA8K1fc8HIZjxcLbNEFVhI7OD/7oDu6nVsKJFIFxcnQ9ktyDIfgIwjJ53UXKFqL97Elo=', 'expiration': '2026-02-19T07:34:04.487-03:00'}
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Intentando leer /app/cache/TA.xml manualmente...
+DEBUG: Token válido encontrado manualmente en /app/cache/TA.xml
+DEBUG: Seteando Ticket. Expiracion: 2026-02-19T07:34:04.487-03:00
+INFO:     172.18.0.1:43844 - "GET /api/afip/test-connection/2 HTTP/1.1" 500 Internal Server Error
+WARNING:  StatReload detected changes in 'app/services/afip.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8]
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [28]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [28]
+INFO:     Stopping reloader process [1]
+INFO:     Will watch for changes in these directories: ['/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using StatReload
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: PuntoVenta 2 - CUIT: 20142944295 - Es Produccion: True
+DEBUG: Intentando leer /app/cache/TA.xml manualmente...
+DEBUG: Token válido encontrado manualmente en /app/cache/TA.xml
+DEBUG: Seteando Ticket. Expiracion: 2026-02-19T07:34:04.487-03:00
+INFO:     172.18.0.1:42056 - "GET /api/afip/test-connection/2 HTTP/1.1" 200 OK

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from app import models, schemas
 
 def get_punto_venta(db: Session, punto_venta_id: int):
     return db.query(models.PuntoVenta).filter(models.PuntoVenta.id == punto_venta_id).first()
@@ -23,3 +23,11 @@ def create_punto_venta(db: Session, punto_venta: schemas.PuntoVentaCreate):
     db.commit()
     db.refresh(db_punto_venta)
     return db_punto_venta
+
+def delete_punto_venta(db: Session, punto_venta_id: int):
+    db_punto_venta = db.query(models.PuntoVenta).filter(models.PuntoVenta.id == punto_venta_id).first()
+    if db_punto_venta:
+        db.delete(db_punto_venta)
+        db.commit()
+        return True
+    return False

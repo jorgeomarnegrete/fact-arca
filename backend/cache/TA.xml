@@ -1,0 +1,13 @@
+<loginTicketResponse version="1.0">
+    <header>
+        <source>CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>SERIALNUMBER=CUIT 20142944295, CN=negrete</destination>
+        <uniqueId>310240426</uniqueId>
+        <generationTime>2026-02-18T19:34:04.487-03:00</generationTime>
+        <expirationTime>2026-02-19T07:34:04.487-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhaG9tbywgTz1BRklQLCBDPUFSLCBTRVJJQUxOVU1CRVI9Q1VJVCAzMzY5MzQ1MDIzOSIgZHN0PSJDTj13c2ZlLCBPPUFGSVAsIEM9QVIiIHVuaXF1ZV9pZD0iNDA4NDY2MzkyNCIgZ2VuX3RpbWU9IjE3NzE0NTM5ODQiIGV4cF90aW1lPSIxNzcxNDk3MjQ0Ii8+CiAgICA8b3BlcmF0aW9uIHR5cGU9ImxvZ2luIiB2YWx1ZT0iZ3JhbnRlZCI+CiAgICAgICAgPGxvZ2luIGVudGl0eT0iMzM2OTM0NTAyMzkiIHNlcnZpY2U9IndzZmUiIHVpZD0iU0VSSUFMTlVNQkVSPUNVSVQgMjAxNDI5NDQyOTUsIENOPW5lZ3JldGUiIGF1dGhtZXRob2Q9ImNtcyIgcmVnbWV0aG9kPSIyMiI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24ga2V5PSIyMDE0Mjk0NDI5NSIgcmVsdHlwZT0iNCIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgo=</token>
+        <sign>gP3xQHvefwpSfUA359pqNcRHbFNpxCrUBArR8PWzco6g+hvpKNhdvcf+CVCPBPwUkoESQr8eMdNLundpGKy/xOtv7tWKmGt9/4tHYUvnA8K1fc8HIZjxcLbNEFVhI7OD/7oDu6nVsKJFIFxcnQ9ktyDIfgIwjJ53UXKFqL97Elo=</sign>
+    </credentials>
+</loginTicketResponse>

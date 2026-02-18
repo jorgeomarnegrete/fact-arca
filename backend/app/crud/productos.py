@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from app import models, schemas
 
 def get_producto(db: Session, producto_id: int):
     return db.query(models.Producto).filter(models.Producto.id == producto_id).first()
