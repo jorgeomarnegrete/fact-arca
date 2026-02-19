@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PuntoVentaForm } from "@/components/PuntoVentaForm";
 import { PuntoVentaList } from "@/components/PuntoVentaList";
+import { Facturador } from "@/components/Facturador";
 import { Toaster } from "@/components/ui/toaster";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -24,7 +25,7 @@ function App() {
         <Tabs defaultValue="config" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="config">Configuración (Puntos de Venta)</TabsTrigger>
-            <TabsTrigger value="facturas" disabled>Facturación (Próximamente)</TabsTrigger>
+            <TabsTrigger value="facturas">Factura Electrónica</TabsTrigger>
           </TabsList>
 
           <TabsContent value="config">
@@ -39,9 +40,7 @@ function App() {
           </TabsContent>
 
           <TabsContent value="facturas">
-            <div className="text-center py-12 text-muted-foreground">
-              El módulo de facturación estará disponible pronto.
-            </div>
+            <Facturador />
           </TabsContent>
         </Tabs>
       </main>
@@ -51,3 +50,4 @@ function App() {
 }
 
 export default App;
+

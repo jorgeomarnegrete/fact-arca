@@ -176,37 +176,89 @@ class AfipService:
         # cbte_tipo: 1=Factura A, 6=Factura B, 11=Factura C
         return self.wsfe.CompUltimoAutorizado(tipo_comprobante, punto_venta)
 
-    def create_invoice(self, punto_venta, tipo_comprobante, numero, fecha, total, dni_cuit, tipo_doc, lineas_items):
-        """
-        Envía una factura a AFIP para obtener CAE.
-        lineas_items: lista de dicts con detalle (opcional para facturas, pero útil para validar totales)
-        """
-        concepto = 1 # 1: Productos, 2: Servicios, 3: Productos y Servicios
-        
-        # Validar fecha
-        fecha_cbte = fecha.strftime("%Y%m%d")
+    def create_invoice(self, punto_venta, tipo_comprobante, numero, fecha, total, dni_cuit, tipo_doc, lineas_items, condicion_iva=None):
+        if not self.wsfe:
+             raise Exception("Servicio WSFE no inicializado")
 
-        # Configurar cabecera
+        self.wsfe.Reprocesar = False
+        concepto = 1 # Productos
+        
+        # Mapeo de Condiciones IVA (Strings del frontend -> IDs AFIP)
+        # 1: IVA Responsable Inscripto
+        # 4: IVA Sujeto Exento
+        # 5: Consumidor Final
+        # 6: Responsable Monotributo
+        # 8: Proveedor del Exterior
+        # 9: Cliente del Exterior
+        # 13: Monotributista Social
+        condicion_iva_map = {
+            "Responsable Inscripto": 1,
+            "Exento": 4,
+            "Consumidor Final": 5,
+            "Monotributo": 6,
+            "Monotributista Social": 13
+        }
+
+        # Preparar factura
+        # CrearFactura(concepto, tipo_doc, nro_doc, doc_asoc, cbte_asoc,
+        #              punto_venta, cbte_nro, imp_total, imp_tot_conc, imp_neto,
+        #              imp_iva, imp_trib, imp_op_ex, fecha_cbte, fecha_venc_pago,
+        #              fecha_serv_desde, fecha_serv_hasta, moneda_id, moneda_ctz)
+        
+        if int(tipo_comprobante) == 11: # Factura C
+            imp_neto = total
+            imp_iva = 0.0
+        else:
+             # Calcular netos e IVA (para A y B)
+             imp_neto = sum(item['base_imponible'] for item in lineas_items)
+             imp_iva = sum(item['importe_iva'] for item in lineas_items)
+             # Ajuste de decimales (importante para AFIP/Python float issues)
+             imp_neto = float(f"{imp_neto:.2f}")
+             imp_iva = float(f"{imp_iva:.2f}")
+
+        # Obtener ID Condicion IVA Receptor
+        iva_receptor_id = None
+        if condicion_iva:
+            iva_receptor_id = condicion_iva_map.get(condicion_iva)
+
         self.wsfe.CrearFactura(
             concepto=concepto,
             tipo_doc=tipo_doc,
-            nro_doc=dni_cuit,
             tipo_cbte=tipo_comprobante,
+            nro_doc=dni_cuit,
+            doc_asoc=0,
+            cbte_asoc=0,
             punto_vta=punto_venta,
             cbt_desde=numero,
             cbt_hasta=numero,
             imp_total=total,
-            imp_tot_conc=0, # Importe neto no gravado
-            imp_neto=total / 1.21, # Simplificación: asumimos todo al 21% por ahora (ajustar lógica luego)
-            imp_iva=total - (total / 1.21),
+            imp_tot_conc=0,
+            imp_neto=imp_neto,
+            imp_iva=imp_iva,
             imp_trib=0,
             imp_op_ex=0,
-            fecha_cbte=fecha_cbte,
-            fecha_venc_pago=None
+            fecha_cbte=fecha.strftime("%Y%m%d"),
+            fecha_venc_pago=None, # No obligatorio para Concepto 1 (Productos)
+            fecha_serv_desde=None,
+            fecha_serv_hasta=None,
+            moneda_id="PES",
+            moneda_ctz=1.000,
+            condicion_iva_receptor_id=iva_receptor_id
         )
-        
-        # Agregar alícuotas de IVA (Simplificado al 21%)
-        self.wsfe.AgregarIva(id_iva=5, base_imp=total / 1.21, importe=total - (total / 1.21)) # 5 = 21%
+
+        # Agregar detalle de IVA (Solo para NO Factura C)
+        if int(tipo_comprobante) != 11:
+            for item in lineas_items:
+                 # Asumiendo 21% por defecto si no viene
+                 iva_id = 5 # 21%
+                 if item.get('alicuota_iva') == 10.5:
+                     iva_id = 4
+                 elif item.get('alicuota_iva') == 0:
+                     iva_id = 3
+                 elif item.get('alicuota_iva') == 27:
+                     iva_id = 6
+
+                 self.wsfe.AgregarIva(iva_id, item['base_imponible'], item['importe_iva'])
 
         # Solicitar CAE
         self.wsfe.CAESolicitar()
@@ -220,6 +272,6 @@ class AfipService:
         else:
             return {
                 "resultado": "Rechazado",
-                "errores": self.wsfe.Excepcion,
+                "errores": f"{self.wsfe.Excepcion}\n{self.wsfe.ErrMsg}".strip(),
                 "observaciones": self.wsfe.Obs
             }

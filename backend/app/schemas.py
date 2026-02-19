@@ -25,6 +25,7 @@ class ClienteBase(BaseModel):
     direccion: Optional[str] = None
     email: Optional[str] = None
     condicion_iva: Optional[str] = None
+    condicion_iva: Optional[str] = None
 
 class ClienteCreate(ClienteBase):
     pass
@@ -58,8 +59,17 @@ class ComprobanteDetalleBase(BaseModel):
     alicuota_iva: float = 21.0
     subtotal: float
 
+class ClienteDetalleCreate(BaseModel):
+    nombre: str
+    numero_documento: str
+    tipo_documento: Optional[int] = 80
+    direccion: Optional[str] = None
+    condicion_iva: Optional[str] = None
+    email: Optional[str] = None
+
 class ComprobanteCreate(BaseModel):
-    cliente_id: int
+    cliente_id: Optional[int] = None
+    cliente_detalle: Optional[ClienteDetalleCreate] = None
     punto_venta_id: int
     tipo_comprobante: int # 1=A, 6=B, 11=C
     items: List[ComprobanteDetalleBase]

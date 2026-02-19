@@ -18,12 +18,17 @@ class InvoiceService:
         if not os.path.exists(pv.certificado_path) or not os.path.exists(pv.key_path):
             raise ValueError("Certificados de AFIP no configurados para este punto de venta")
 
+        # Determinar directorio de caché (backend/cache)
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        CACHE_DIR = os.path.join(BASE_DIR, "cache")
+
         # 2. Inicializar Servicio AFIP
         afip = AfipService(
             cuit=pv.cuit,
             certificado=pv.certificado_path,
             clave_privada=pv.key_path,
-            produccion=pv.es_produccion
+            produccion=pv.es_produccion,
+            cache_dir=CACHE_DIR
         )
 
         try:
@@ -35,24 +40,71 @@ class InvoiceService:
             ultimo_cbte = afip.get_last_invoice_number(pv.numero, data.tipo_comprobante)
             nuevo_numero = int(ultimo_cbte) + 1
 
-            # 5. Obtener datos del cliente
-            cliente = self.db.query(Cliente).filter(Cliente.id == data.cliente_id).first()
-            if not cliente:
-                 raise ValueError("Cliente no encontrado")
+            # 5. Obtener o Crear Cliente
+            cliente = None
+            if data.cliente_id:
+                cliente = self.db.query(Cliente).filter(Cliente.id == data.cliente_id).first()
+            
+            if not cliente and data.cliente_detalle:
+                # Buscar por CUIT
+                cliente = self.db.query(Cliente).filter(Cliente.numero_documento == data.cliente_detalle.numero_documento).first()
+                if not cliente:
+                    # Crear nuevo cliente
+                    cliente = Cliente(
+                        nombre=data.cliente_detalle.nombre,
+                        numero_documento=data.cliente_detalle.numero_documento,
+                        tipo_documento=data.cliente_detalle.tipo_documento,
+                        direccion=data.cliente_detalle.direccion,
+                        condicion_iva=data.cliente_detalle.condicion_iva,
+                        email=data.cliente_detalle.email
+                    )
+                    self.db.add(cliente)
+                    self.db.commit()
+                    self.db.refresh(cliente)
+                else:
+                    # Actualizar datos existentes (opcional, pero útil)
+                    cliente.nombre = data.cliente_detalle.nombre
+                    cliente.direccion = data.cliente_detalle.direccion
+                    cliente.condicion_iva = data.cliente_detalle.condicion_iva
+                    self.db.commit()
+                    self.db.refresh(cliente)
 
+            if not cliente:
+                 raise ValueError("Cliente no encontrado y no se proporcionaron datos para crearlo")
+            
             # 6. Enviar a AFIP
             # TODO: Mapear tipo_doc de cliente a código AFIP (80=CUIT, 96=DNI, etc.)
             tipo_doc_afip = cliente.tipo_documento 
             
+            fecha_actual = datetime.now()
+            
+            # Preparar items para AFIP (y calcular totales precisos)
+            items_afip = []
+            for item in data.items:
+                # Calcular base imponible e IVA para cada item
+                # Asumimos que item.subtotal es Precio Final (con IVA)
+                alicuota = item.alicuota_iva or 21.0
+                divisor = 1 + (alicuota / 100.0)
+                
+                neto = item.subtotal / divisor
+                iva = item.subtotal - neto
+                
+                items_afip.append({
+                    'base_imponible': neto,
+                    'importe_iva': iva,
+                    'alicuota_iva': alicuota
+                })
+
             afip_result = afip.create_invoice(
                 punto_venta=pv.numero,
                 tipo_comprobante=data.tipo_comprobante,
                 numero=nuevo_numero,
-                fecha=datetime.now(),
+                fecha=fecha_actual,
                 total=data.total_comprobante,
-                dni_cuit=int(cliente.numero_documento),
+                dni_cuit=int(cliente.numero_documento) if cliente.numero_documento.isdigit() else 0,
                 tipo_doc=tipo_doc_afip,
-                lineas_items=None # Por ahora no enviamos detalle de ítems a AFIP (no obligatorio en facturas A/B standard)
+                lineas_items=items_afip,
+                condicion_iva=cliente.condicion_iva
             )
 
             # 7. Guardar en Base de Datos
@@ -68,7 +120,7 @@ class InvoiceService:
                 cae=afip_result.get("cae"),
                 vto_cae=datetime.strptime(afip_result.get("vencimiento"), "%Y%m%d").date() if afip_result.get("vencimiento") else None,
                 resultado_afip=afip_result.get("resultado"),
-                observaciones_afip=afip_result.get("observaciones")
+                observaciones_afip=f"Errores: {afip_result.get('errores', '')}\nObservaciones: {afip_result.get('observaciones', '')}".strip() if afip_result.get("resultado") == "Rechazado" else afip_result.get("observaciones")
             )
             
             self.db.add(nuevo_comprobante)
